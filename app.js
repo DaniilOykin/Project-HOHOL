@@ -4,15 +4,27 @@
 // @version      0.1
 // @description  aboba2
 // @author       You
-// @match        https://www.isuct.ru/
+// @match        *
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=soundsnap.com
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
-    let imgs = document.querySelectorAll("img")
-    for(let img of imgs) {
-        img.src = "https://i.pinimg.com/originals/7a/da/30/7ada3098838344a39258f4618bce61f4.jpg"
+    let p = document.querySelectorAll("p");
+    let senteceOfOneP = [];
+    for(let sentence of p) {
+        senteceOfOneP.push(sentence.innerText);
+        if(sentence.innerText.search("Украинец")){
+            console.log("true");
+            let sentenceArr = sentence.innerText.split(" ");
+            for(let word in sentenceArr) {
+                if(sentenceArr[word] == "украинец") {
+                    sentenceArr[word] = "Хохол";
+                }
+            }
+            console.log(sentenceArr);
+            sentence.innerText = sentenceArr.join(" ");
+        }
     }
 })();
